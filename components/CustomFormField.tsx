@@ -3,14 +3,13 @@
 import Image from "next/image";
 import {  
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Control, Form } from "react-hook-form"
+import { Control} from "react-hook-form"
 import { FormFieldType } from "./forms/PatientForms"
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
@@ -18,7 +17,7 @@ import { E164Number } from 'libphonenumber-js/core'
 
 interface CustomProps {
     fieldType: FormFieldType
-    control: Control<any>,
+    control: Control<unknown>,
     name: string,
     label?: string,
     placeholder?: string,
@@ -28,10 +27,10 @@ interface CustomProps {
     dateFormat?: string,
     showTimeSelect?: boolean,
     children?: React.ReactNode,
-    renderSkeleton?: (field: any) => React.ReactNode,
+    renderSkeleton?: (field: unknown) => React.ReactNode,
 }
 
-const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
+const RenderField = ({ field, props }: { field: unknown; props: CustomProps }) => {
     const { fieldType, iconSrc, iconAlt, placeholder} = props;
 
     switch (fieldType) {
