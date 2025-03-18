@@ -17,7 +17,7 @@ import { E164Number } from 'libphonenumber-js/core'
 
 interface CustomProps {
     fieldType: FormFieldType
-    control: Control<unknown>,
+    control: Control<any>,
     name: string,
     label?: string,
     placeholder?: string,
