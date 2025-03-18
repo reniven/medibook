@@ -31,8 +31,8 @@ interface CustomProps {
     renderSkeleton?: (field: any) => React.ReactNode,
 }
 
-const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-    const { fieldType, iconSrc, iconAlt, placeholder} = props;
+function RenderField({ field, props }: { field: any; props: CustomProps }) {
+    const { fieldType, iconSrc, iconAlt, placeholder, renderSkeleton} = props;
 
     switch (fieldType) {
         case FormFieldType.INPUT:
@@ -70,12 +70,26 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                     />
                 </FormControl>
             )
+        case FormFieldType.DATE_PICKER:
+            return (
+                <div className="flex rounded-md border border-dark-500 bg-dark-400">
+                    <Image
+                        src="/assets/icons/calendar.svg"
+                        alt="calendar"
+                        className="ml-2"
+                        width={24}
+                        height={24}
+                    />
+                </div>
+            )
+        case FormFieldType.SKELETON:
+            return renderSkeleton ? renderSkeleton(field) : null;
         default:
             break;
     }
-}
+};
 
-const CustomFormField = (props: CustomProps) => {
+export default function CustomFormField(props: CustomProps) {
     const { fieldType, control, name, label } = props;
 
     return (
@@ -95,6 +109,4 @@ const CustomFormField = (props: CustomProps) => {
             )}
         />
     )
-}
-
-export default CustomFormField
+};

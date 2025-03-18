@@ -7,7 +7,7 @@ interface ButtonProps {
     children: React.ReactNode;
 }
 
-const SubmitButton = ({ isLoading, className, children}: ButtonProps) => {
+export default function SubmitButton({ isLoading, className, children}: ButtonProps) {
     return (
         <Button 
             type="submit"
@@ -29,5 +29,3 @@ const SubmitButton = ({ isLoading, className, children}: ButtonProps) => {
         </Button>
     );
 };
-
-export default SubmitButton;
