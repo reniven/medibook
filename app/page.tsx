@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="flex h-screen max-h-screen">
-      <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[496px]">
+      <section className="remove-scrollbar relative flex-1 overflow-y-auto px-[5%] my-auto">
+        <div className="mx-auto flex size-full flex-col py-10 max-w-[496px]">
           <Image
             src="/assets/icons/logo-full.svg"
             height={1000}
@@ -33,7 +33,7 @@ export default function Home() {
         height={1000}
         width={1000}
         alt="patient"
-        className="side-img max-w-[50%]" 
+        className="hidden h-full object-cover md:block max-w-[50%]" 
       />
     </div>
   );

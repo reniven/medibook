@@ -10,7 +10,7 @@ export const parseStringify = (value: unknown) => JSON.parse(JSON.stringify(valu
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 
 // FORMAT DATE TIME
-export const formatDateTime = (dateString: Date | string, timeZone: string = Intl.DateTimeFormat().resolvedOptions().timeZone) => {
+export function formatDateTime(dateString: Date | string, timeZone: string = Intl.DateTimeFormat().resolvedOptions().timeZone) {
   const dateTimeOptions: Intl.DateTimeFormatOptions = {
     // weekday: "short", // abbreviated weekday name (e.g., 'Mon')
     month: "short", // abbreviated month name (e.g., 'Oct')
