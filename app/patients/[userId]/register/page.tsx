@@ -3,9 +3,9 @@ import Link from "next/link";
 import { RegisterForm } from "@/components/forms/RegisterForm";
 import { getUser } from "@/lib/actions/patients.actions";
 
-export default async function Register({
-  params: { userId },
-}: SearchParamProps) {
+export default async function Register(props: { params: Promise<{ userId: string }> }) {
+  const params = await props.params;
+  const userId = params.userId;
   const user = await getUser(userId);
 
   return (
