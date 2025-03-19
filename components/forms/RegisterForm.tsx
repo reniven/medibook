@@ -140,9 +140,42 @@ export function RegisterForm({ user }: { user: User }) {
               </FormControl>
             )}
           />
-          <section className="space-y-6">
-            <p className="text-[18px] leading-[24px] font-bold md:text-[24px] leading-[28px] font-bold">Medical Information</p>
-          </section>
+
+          <div className="flex flex-col gap-6 xl:flex-row>">
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="address"
+              label="Address"
+              placeholder="14th Street, New York"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="occupation"
+              label="Occupation"
+              placeholder="Software Engineer"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="emergencyContactName"
+              label="Emergency Contact Name"
+              placeholder="Guardian's Name"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.PHONE_INPUT}
+              control={form.control}
+              name="emergencyContactNumber"
+              label="Emergency Contact Number"
+              placeholder="(555) 555-5555"
+              iconSrc="/assets/icons/phone.svg"
+              iconAlt="phone"
+            />
+          </div>
         </div>
 
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
