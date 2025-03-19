@@ -7,7 +7,7 @@ import {
   DATABASE_ID,
   databases,
   ENDPOINT,
-  PATIENT_COLLECTION_ID,
+  PATIENTS_COLLECTION_ID,
   PROJECT_ID,
   storage,
   users,
@@ -50,6 +50,7 @@ export async function getUser(userId: string) {
   }
 }
 
+// REGISTER PATIENT
 export async function registerPatient({
   identificationDocument,
   ...patient
@@ -67,11 +68,11 @@ export async function registerPatient({
 
       const newPatient = await databases.createDocument(
         DATABASE_ID!,
-        PATIENT_COLLECTION_ID!,
+        PATIENTS_COLLECTION_ID!,
         ID.unique(),
         {
-          identificationDocumentId: file?.$id || null,
-          identificationDocumentUrl: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
+          identificationDocumentID: file?.$id || null,
+          identificationDocumentURL: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
             ...patient,
         }
       );

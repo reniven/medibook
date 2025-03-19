@@ -63,11 +63,12 @@ export function RegisterForm({ user }: { user: User }) {
     try {
       const patientData = {
         ...values,
-        userId: user.$id,
+        userID: user.$id,
         birthDate: new Date(values.birthDate),
         identificationDocument: formData,
       };
 
+      // @ts-ignore
       const newPatient = await registerPatient(patientData);
 
       if (newPatient) {
