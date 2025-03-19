@@ -211,6 +211,42 @@ export function RegisterForm({ user }: { user: User }) {
               </SelectItem>
             ))}
           </CustomFormField>
+
+          <div className="flex flex-col gap-6 xl:flex-row>">
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="insuranceProvider"
+              label="Insurance Provider"
+              placeholder="BlueCross BlueShield"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.INPUT}
+              control={form.control}
+              name="insurancePolicyNumber"
+              label="Insurance Policy Number"
+              placeholder="123456789"
+            />
+          </div>
+
+          <div className="flex flex-col gap-6 xl:flex-row>">
+            <CustomFormField
+              fieldType={FormFieldType.TEXTAREA}
+              control={form.control}
+              name="allergies"
+              label="Allergies (if any)"
+              placeholder="Peanuts, Pencilin, Shellfish"
+            />
+
+            <CustomFormField
+              fieldType={FormFieldType.TEXTAREA}
+              control={form.control}
+              name="currentMedications"
+              label="Current Medications (if any)"
+              placeholder="Aspirin, Ibuprofen"
+            />
+          </div>
           </section>
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
