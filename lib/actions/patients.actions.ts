@@ -73,7 +73,7 @@ export async function registerPatient({
         {
           identificationDocumentID: file?.$id || null,
           identificationDocumentURL: `${ENDPOINT}/storage/buckets/${BUCKET_ID}/files/${file?.$id}/view?project=${PROJECT_ID}`,
-            ...patient,
+          ...patient,
         }
       );
 
@@ -81,5 +81,22 @@ export async function registerPatient({
     }
   } catch (error) {
     console.log("An error occurred while registering patient:", error);
+  }
+}
+
+// GET PATIENT
+export async function getPatient(userId: string) {
+  try {
+    const patient = await databases.listDocuments(
+      DATABASE_ID!,
+      PATIENTS_COLLECTION_ID!,
+      [
+        Query.equal("userID", userId)
+      ],
+    );
+
+    return parseStringify(patient.documents[0]);
+  } catch (error: any) {
+    console.error("An error occurred while fetching patient:", error);
   }
 }
