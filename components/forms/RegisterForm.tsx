@@ -13,10 +13,11 @@ import { createUser } from "@/lib/actions/patients.actions";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForms";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Doctors, GenderOptions } from "@/constants";
+import { Doctors, GenderOptions, IdentificationTypes } from "@/constants";
 import { Label } from "@/components/ui/label";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
+import FileUploader from "@/components/FileUploader";
 
 export function RegisterForm({ user }: { user: User }) {
   const router = useRouter();
@@ -70,97 +71,96 @@ export function RegisterForm({ user }: { user: User }) {
 
         <section className="space-y-6">
           <div className="mb-9 space-y-1">
-          <h2 className="text-dark-700">Personal Information</h2>
-        </div>
+            <h2 className="text-dark-700">Personal Information</h2>
+          </div>
 
-        <CustomFormField
-          fieldType={FormFieldType.INPUT}
-          control={form.control}
-          name="name"
-          label="Full Name"
-          placeholder="John Doe"
-          iconSrc="/assets/icons/user.svg"
-          iconAlt="user"
-        />
-
-        <div className="flex flex-col gap-6 xl:flex-row>">
           <CustomFormField
             fieldType={FormFieldType.INPUT}
             control={form.control}
-            name="email"
-            label="Email"
-            placeholder="john"
-            iconSrc="/assets/icons/email.svg"
-            iconAlt="email"
-          />
-
-          <CustomFormField
-            fieldType={FormFieldType.PHONE_INPUT}
-            control={form.control}
-            name="phone"
-            label="Phone"
-            placeholder="1234567890"
-            iconSrc="/assets/icons/phone.svg"
-            iconAlt="phone"
-          />
-        </div>
-
-        <div className="flex flex-col gap-6 xl:flex-row>">
-          <CustomFormField
-            fieldType={FormFieldType.DATE_PICKER}
-            control={form.control}
-            name="birthDate"
-            label="Date of Birth"
-            placeholder="john"
-            iconSrc="/assets/icons/email.svg"
-            iconAlt="email"
-          />
-
-          <CustomFormField
-            fieldType={FormFieldType.SKELETON}
-            control={form.control}
-            name="gender"
-            label="Gender"
-            renderSkeleton={(field) => (
-              <FormControl>
-                <RadioGroup
-                  className="flex h-11 gap-6 xl:justify-between"
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  {GenderOptions.map((option) => (
-                    <div
-                      key={option}
-                      className="flex h-full flex-1 items-center gap-2 rounded-md border border-dashed border-dark-500 bg-dark-400 p-3"
-                    >
-                      <RadioGroupItem value={option} id={option} />
-                      <Label htmlFor={option} className="cursor-pointer">
-                        {option}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-            )}
+            name="name"
+            label="Full Name"
+            placeholder="John Doe"
+            iconSrc="/assets/icons/user.svg"
+            iconAlt="user"
           />
 
           <div className="flex flex-col gap-6 xl:flex-row>">
             <CustomFormField
               fieldType={FormFieldType.INPUT}
               control={form.control}
-              name="address"
-              label="Address"
-              placeholder="14th Street, New York"
+              name="email"
+              label="Email"
+              placeholder="john"
+              iconSrc="/assets/icons/email.svg"
+              iconAlt="email"
             />
 
             <CustomFormField
-              fieldType={FormFieldType.INPUT}
+              fieldType={FormFieldType.PHONE_INPUT}
               control={form.control}
-              name="occupation"
-              label="Occupation"
-              placeholder="Software Engineer"
+              name="phone"
+              label="Phone"
+              placeholder="1234567890"
+              iconSrc="/assets/icons/phone.svg"
+              iconAlt="phone"
+            />
+          </div>
+
+          <div className="flex flex-col gap-6 xl:flex-row>">
+            <CustomFormField
+              fieldType={FormFieldType.DATE_PICKER}
+              control={form.control}
+              name="birthDate"
+              label="Date of Birth"
+              placeholder="john"
+              iconSrc="/assets/icons/email.svg"
+              iconAlt="email"
             />
 
+            <CustomFormField
+              fieldType={FormFieldType.SKELETON}
+              control={form.control}
+              name="gender"
+              label="Gender"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <RadioGroup
+                    className="flex h-11 gap-6 xl:justify-between"
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    {GenderOptions.map((option) => (
+                      <div
+                        key={option}
+                        className="flex h-full flex-1 items-center gap-2 rounded-md border border-dashed border-dark-500 bg-dark-400 p-3"
+                      >
+                        <RadioGroupItem value={option} id={option} />
+                        <Label htmlFor={option} className="cursor-pointer">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              )}
+            />
+
+            <div className="flex flex-col gap-6 xl:flex-row>">
+              <CustomFormField
+                fieldType={FormFieldType.INPUT}
+                control={form.control}
+                name="address"
+                label="Address"
+                placeholder="14th Street, New York"
+              />
+
+              <CustomFormField
+                fieldType={FormFieldType.INPUT}
+                control={form.control}
+                name="occupation"
+                label="Occupation"
+                placeholder="Software Engineer"
+              />
             </div>
 
             <div className="flex flex-col gap-6 xl:flex-row>"></div>
@@ -182,12 +182,11 @@ export function RegisterForm({ user }: { user: User }) {
               iconAlt="phone"
             />
           </div>
-          </section>
-          <section className="space-y-6">
-            <h2 className="text-[18px] leading-[24px] font-bold md:text-[24px] leading-[28px] font-bold">
-              Medical Information
-            </h2>
-          
+        </section>
+        <section className="space-y-6">
+          <h2 className="text-[18px] leading-[24px] font-bold md:text-[24px] leading-[28px] font-bold">
+            Medical Information
+          </h2>
 
           <CustomFormField
             fieldType={FormFieldType.SELECT}
@@ -206,8 +205,8 @@ export function RegisterForm({ user }: { user: User }) {
                     height={32}
                     className="rounded-full border border-dark-500"
                   />
-                    <p className="text-dark-700">{doctor.name}</p>                  
-                  </div>
+                  <p className="text-dark-700">{doctor.name}</p>
+                </div>
               </SelectItem>
             ))}
           </CustomFormField>
@@ -265,7 +264,53 @@ export function RegisterForm({ user }: { user: User }) {
               placeholder="Diabetes, Hypertension"
             />
           </div>
-          </section>
+        </section>
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="text-dark-700">Identification and Verification</h2>
+          </div>
+        </section>
+
+        <CustomFormField
+          fieldType={FormFieldType.SELECT}
+          control={form.control}
+          name="identificationType"
+          label="Identification Type"
+          placeholder="Select an Identification Type"
+        >
+          {IdentificationTypes.map((type) => (
+            <SelectItem key={type} value={type}>
+              {type}
+            </SelectItem>
+          ))}
+        </CustomFormField>
+
+        <CustomFormField
+          fieldType={FormFieldType.INPUT}
+          control={form.control}
+          name="identificationNumber"
+          label="Identification Number"
+          placeholder="123456789"
+        />
+
+        <CustomFormField
+          fieldType={FormFieldType.SKELETON}
+          control={form.control}
+          name="identificationDocument"
+          label="Scanned copy of Identification Document"
+          renderSkeleton={(field) => (
+            <FormControl>
+              <FileUploader files={field.value} onChange={field.onChange} />
+            </FormControl>
+          )}
+        />
+
+        <section className="space-y-6">
+          <div className="mb-9 space-y-1">
+            <h2 className="text-18-bold md:text-24-bold">Consent and Privacy</h2>
+          </div>
+        </section>
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
