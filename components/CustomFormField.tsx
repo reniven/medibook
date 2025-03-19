@@ -9,6 +9,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "./ui/textarea";
+import { Checkbox } from "./ui/checkbox";
 import { Control, Form } from "react-hook-form";
 import { FormFieldType } from "./forms/PatientForms";
 import "react-phone-number-input/style.css";
@@ -20,7 +22,6 @@ import {
   SelectContent,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Textarea } from "./ui/textarea";
 
 interface CustomProps {
   fieldType: FormFieldType;
@@ -116,6 +117,21 @@ function RenderField({ field, props }: { field: any; props: CustomProps }) {
       );
     case FormFieldType.SKELETON:
       return renderSkeleton ? renderSkeleton(field) : null;
+    case FormFieldType.CHECKBOX:
+        return (
+      <FormControl>
+        <div className="flex items-center gap-4">
+          <Checkbox 
+            id={props.name}
+            checked={field.value}
+            onCheckedChange={field.onChange}
+          />
+          <label htmlFor={props.name}>
+            {props.label}
+          </label>
+        </div>
+      </FormControl>
+    );
     default:
       break;
   }
