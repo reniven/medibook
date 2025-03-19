@@ -20,6 +20,7 @@ import {
   SelectContent,
   SelectTrigger,
 } from "@/components/ui/select";
+import { Textarea } from "./ui/textarea";
 
 interface CustomProps {
   fieldType: FormFieldType;
@@ -60,6 +61,17 @@ function RenderField({ field, props }: { field: any; props: CustomProps }) {
             />
           </FormControl>
         </div>
+      );
+    case FormFieldType.TEXTAREA:
+      return (
+        <FormControl>
+          <Textarea
+            placeholder={placeholder}
+            {...field}
+            className="shad-textArea"
+            disabled={props.disabled}
+          />
+        </FormControl>
       );
     case FormFieldType.PHONE_INPUT:
       return (
