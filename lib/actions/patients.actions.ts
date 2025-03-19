@@ -6,38 +6,36 @@ import { parseStringify } from "../utils";
 
 // CREATE USER
 export const createUser = async (user: CreateUserParams) => {
-    try {
-        const newUser = await users.create(
-            ID.unique(),
-            user.email,
-            user.phone,
-            undefined,
-            user.name
-        );
+  try {
+    const newUser = await users.create(
+      ID.unique(),
+      user.email,
+      user.phone,
+      undefined,
+      user.name
+    );
 
-        console.log(newUser);
+    console.log(newUser);
 
-        return parseStringify(newUser);
-    } catch (error: any) {
-        if(error && error?.code === 409) {
-            const documents = await users.list([
-                Query.equal('email', [user.email])
-            ])
+    return parseStringify(newUser);
+  } catch (error: any) {
+    if (error && error?.code === 409) {
+      const documents = await users.list([Query.equal("email", [user.email])]);
 
-            return documents.users[0];
-        }
-
-        console.error("An error occurred while creating a new user:", error);
+      return documents.users[0];
     }
-}; 
+
+    console.error("An error occurred while creating a new user:", error);
+  }
+};
 
 // GET USER
 export const getUser = async (userId: string) => {
-    try {
-        const user = await users.get(userId);
+  try {
+    const user = await users.get(userId);
 
-        return parseStringify(user);
-    } catch (error) {
-        console.error("An error occurred while fetching user:", error);
-    }
+    return parseStringify(user);
+  } catch (error) {
+    console.error("An error occurred while fetching user:", error);
+  }
 };
