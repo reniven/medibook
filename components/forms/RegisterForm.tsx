@@ -13,9 +13,10 @@ import { createUser } from "@/lib/actions/patients.actions";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForms";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { GenderOptions } from "@/constants";
+import { Doctors, GenderOptions } from "@/constants";
 import { Label } from "@/components/ui/label";
 import { SelectItem } from "../ui/select";
+import Image from "next/image";
 
 export function RegisterForm({ user }: { user: User }) {
   const router = useRouter();
@@ -197,7 +198,7 @@ export function RegisterForm({ user }: { user: User }) {
           >
             {Doctors.map((doctor) => (
               <SelectItem key={doctor.name} value={doctor.name}>
-                <div classname="flex cursor-pointer items-center gap2">
+                <div className="flex cursor-pointer items-center gap2">
                   <Image
                     src={doctor.image}
                     alt={doctor.name}
