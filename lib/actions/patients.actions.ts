@@ -15,7 +15,7 @@ export async function createUser(user: CreateUserParams) {
             user.name
         );
 
-        console.log(newUser);
+    console.log(newUser);
 
         return parseStringify(newUser);
     } catch (error: any) { 
@@ -24,8 +24,8 @@ export async function createUser(user: CreateUserParams) {
                 Query.equal('email', [user.email])
             ])
 
-            return documents.users[0];
-        }
+      return documents.users[0];
+    }
 
         console.error("An error occurred while creating a new user:", error);
     }

@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 interface ButtonProps {
-    isLoading: boolean;
-    className?: string;
-    children: React.ReactNode;
+  isLoading: boolean;
+  className?: string;
+  children: React.ReactNode;
 }
 
 export default function SubmitButton({ isLoading, className, children}: ButtonProps) {

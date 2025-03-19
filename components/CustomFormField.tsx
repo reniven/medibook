@@ -1,33 +1,33 @@
-"use client"
+"use client";
 
 import Image from "next/image";
-import {  
+import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Control} from "react-hook-form"
-import { FormFieldType } from "./forms/PatientForms"
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-import { E164Number } from 'libphonenumber-js/core'
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Control } from "react-hook-form";
+import { FormFieldType } from "./forms/PatientForms";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { E164Number } from "libphonenumber-js/core";
 
 interface CustomProps {
-    fieldType: FormFieldType
-    control: Control<any>,
-    name: string,
-    label?: string,
-    placeholder?: string,
-    iconSrc?: string,
-    iconAlt?: string,
-    disabled?: boolean,
-    dateFormat?: string,
-    showTimeSelect?: boolean,
-    children?: React.ReactNode,
-    renderSkeleton?: (field: unknown) => React.ReactNode,
+  fieldType: FormFieldType;
+  control: Control<any>;
+  name: string;
+  label?: string;
+  placeholder?: string;
+  iconSrc?: string;
+  iconAlt?: string;
+  disabled?: boolean;
+  dateFormat?: string;
+  showTimeSelect?: boolean;
+  children?: React.ReactNode;
+  renderSkeleton?: (field: any) => React.ReactNode;
 }
 
 function RenderField({ field, props }: { field: any; props: CustomProps }) {
@@ -91,17 +91,17 @@ function RenderField({ field, props }: { field: any; props: CustomProps }) {
 export default function CustomFormField(props: CustomProps) {
     const { fieldType, control, name, label } = props;
 
-    return (
-        <FormField
-            control={control}
-            name={name}
-            render={({ field }) => (
-                <FormItem className="flex-1">
-                    {fieldType !== FormFieldType.CHECKBOX && label && (
-                        <FormLabel>{label}</FormLabel>
-                    )}
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className="flex-1">
+          {fieldType !== FormFieldType.CHECKBOX && label && (
+            <FormLabel>{label}</FormLabel>
+          )}
 
-                    <RenderField field={field} props={props}/>
+          <RenderField field={field} props={props} />
 
                     <FormMessage className="shad-error" />
                 </FormItem>
