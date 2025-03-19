@@ -15,6 +15,7 @@ import { FormFieldType } from "./PatientForms";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { GenderOptions } from "@/constants";
 import { Label } from "@/components/ui/label";
+import { SelectItem } from "../ui/select";
 
 export function RegisterForm({ user }: { user: User }) {
   const router = useRouter();
@@ -67,8 +68,9 @@ export function RegisterForm({ user }: { user: User }) {
         </section>
 
         <section className="space-y-4">
-          <p className="text-dark-700">Personal Information</p>
-        </section>
+          <div className="mb-9 space-y-1">
+          <h2 className="text-dark-700">Personal Information</h2>
+        </div>
 
         <CustomFormField
           fieldType={FormFieldType.INPUT}
@@ -158,6 +160,9 @@ export function RegisterForm({ user }: { user: User }) {
               placeholder="Software Engineer"
             />
 
+            </div>
+
+            <div className="flex flex-col gap-6 xl:flex-row>"></div>
             <CustomFormField
               fieldType={FormFieldType.INPUT}
               control={form.control}
@@ -176,8 +181,36 @@ export function RegisterForm({ user }: { user: User }) {
               iconAlt="phone"
             />
           </div>
-        </div>
+          </section>
+          <section className="space-y-6">
+            <h2 className="text-[18px] leading-[24px] font-bold md:text-[24px] leading-[28px] font-bold">
+              Medical Information
+            </h2>
+          
 
+          <CustomFormField
+            fieldType={FormFieldType.SELECT}
+            control={form.control}
+            name="primaryPhysician"
+            label="Primary Physician"
+            placeholder="Select a Physician"
+          >
+            {Doctors.map((doctor) => (
+              <SelectItem key={doctor.name} value={doctor.name}>
+                <div classname="flex cursor-pointer items-center gap2">
+                  <Image
+                    src={doctor.image}
+                    alt={doctor.name}
+                    width={32}
+                    height={32}
+                    className="rounded-full border border-dark-500"
+                  />
+                    <p className="text-dark-700">{doctor.name}</p>                  
+                  </div>
+              </SelectItem>
+            ))}
+          </CustomFormField>
+          </section>
         <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </Form>
