@@ -141,7 +141,7 @@ export function RegisterForm({ user }: { user: User }) {
             )}
           />
           <section className="space-y-6">
-            <p className="text-18-bold md:text-24-bold">Medical Information</p>
+            <p className="text-[18px] leading-[24px] font-bold md:text-[24px] leading-[28px] font-bold">Medical Information</p>
           </section>
         </div>
 
