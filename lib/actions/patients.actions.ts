@@ -18,7 +18,7 @@ export const createUser = async (user: CreateUserParams) => {
         console.log(newUser);
 
         return parseStringify(newUser);
-    } catch (error: unknown) {
+    } catch (error: any) {
         if(error && error?.code === 409) {
             const documents = await users.list([
                 Query.equal('email', [user.email])
@@ -30,3 +30,14 @@ export const createUser = async (user: CreateUserParams) => {
         console.error("An error occurred while creating a new user:", error);
     }
 }; 
+
+// GET USER
+export const getUser = async (userId: string) => {
+    try {
+        const user = await users.get(userId);
+
+        return parseStringify(user);
+    } catch (error) {
+        console.error("An error occurred while fetching user:", error);
+    }
+};

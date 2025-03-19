@@ -30,7 +30,7 @@ interface CustomProps {
     renderSkeleton?: (field: unknown) => React.ReactNode,
 }
 
-const RenderField = ({ field, props }: { field: unknown; props: CustomProps }) => {
+const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     const { fieldType, iconSrc, iconAlt, placeholder} = props;
 
     switch (fieldType) {
