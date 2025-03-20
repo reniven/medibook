@@ -22,6 +22,8 @@ import {
   SelectContent,
   SelectTrigger,
 } from "@/components/ui/select";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface CustomProps {
   fieldType: FormFieldType;
@@ -39,7 +41,7 @@ interface CustomProps {
 }
 
 function RenderField({ field, props }: { field: any; props: CustomProps }) {
-  const { fieldType, iconSrc, iconAlt, placeholder, renderSkeleton } = props;
+  const { fieldType, iconSrc, iconAlt, placeholder, showTimeSelect, dateFormat, renderSkeleton } = props;
 
   switch (fieldType) {
     case FormFieldType.INPUT:
@@ -98,6 +100,14 @@ function RenderField({ field, props }: { field: any; props: CustomProps }) {
             width={24}
             height={24}
           />
+          <DatePicker
+            selected={field.value}
+            onChange={(date) => field.onChange(date)}
+            dateFormat={dateFormat ?? "MM/dd/yyy"}
+            showTimeSelect={showTimeSelect ?? false}
+            timeInputLabel="Time: "
+          />
+          ;
         </div>
       );
     case FormFieldType.SELECT:
@@ -118,20 +128,18 @@ function RenderField({ field, props }: { field: any; props: CustomProps }) {
     case FormFieldType.SKELETON:
       return renderSkeleton ? renderSkeleton(field) : null;
     case FormFieldType.CHECKBOX:
-        return (
-      <FormControl>
-        <div className="flex items-center gap-4">
-          <Checkbox 
-            id={props.name}
-            checked={field.value}
-            onCheckedChange={field.onChange}
-          />
-          <label htmlFor={props.name}>
-            {props.label}
-          </label>
-        </div>
-      </FormControl>
-    );
+      return (
+        <FormControl>
+          <div className="flex items-center gap-4">
+            <Checkbox
+              id={props.name}
+              checked={field.value}
+              onCheckedChange={field.onChange}
+            />
+            <label htmlFor={props.name}>{props.label}</label>
+          </div>
+        </FormControl>
+      );
     default:
       break;
   }

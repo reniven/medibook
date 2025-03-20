@@ -8,25 +8,24 @@ import { Form } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import {
-  UserFormValidation,
   getAppointmentSchema,
 } from "@/lib/validation";
 import { useRouter } from "next/navigation";
-import { createUser } from "@/lib/actions/patients.actions";
 import "react-phone-number-input/style.css";
 import { FormFieldType } from "./PatientForms";
 import { Doctors } from "@/constants";
 import { SelectItem } from "@/components/ui/select";
 import Image from "next/image";
+import { createAppointment } from "@/lib/actions/appointment.actions";
 
 export function AppointmentForm({
-  userId,
+  userID,
   patientId,
   type,
 }: {
-  userId: string;
+  userID: string;
   patientId: string;
-  type: "create" | "cancel";
+  type: "create" | "cancel" | "schedule";
 }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +51,10 @@ export function AppointmentForm({
 
     let status;
     switch (type) {
-      case "create":
-        status = "c";
+      case "schedule":
+        status = "scheduled";
+      case "cancel":
+        status = "pending";
       default:
         status = "pending";
         break;
@@ -62,18 +63,25 @@ export function AppointmentForm({
     try {
       if (type === "create" && patientId) {
         const appointmentData = {
-          userId,
+          userID,
           patient: patientId,
           primaryPhysician: values.primaryPhysician,
           schedule: new Date(values.schedule),
-          reason: values.reason,
+          reason: values.reason!,
           note: values.note,
           status: status as Status,
         };
+
+        const appointment = await createAppointment(appointmentData);
+
+        if(appointment) {
+            form.reset();
+            router.push(`/patients/${userID}/new-appointment/success?appointmentId=${appointment.$id}`)
+        }
       }
 
-      const appointment = await createAppointmentSchema(appointmentData);
     } catch (error) {
+      console.log("hello")
       console.error(error);
     }
 
@@ -89,6 +97,9 @@ export function AppointmentForm({
     case "create":
       buttonLabel = "Create Appointment";
       break;
+    case "schedule":
+        buttonLabel = "Schedule Appoinment";
+        break;
     default:
       break;
   }
@@ -132,7 +143,7 @@ export function AppointmentForm({
               fieldType={FormFieldType.DATE_PICKER}
               control={form.control}
               name="schedule"
-              label="Expected appointment date"
+              label="Expected appointment date" 
               showTimeSelect
               dateFormat="MM/dd/yyyy - h:mm aa"
             ></CustomFormField>

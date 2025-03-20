@@ -21,7 +21,7 @@ export default async function NewAppointment(props: { params: Promise<{ userId: 
 
           <AppointmentForm 
             type="create"
-            userId={userId}
+            userID={userId}
             patientId={patient.$id}
           />
 
