@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) creating a doctor appointment website.
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) creating a doctor appointment website called MediBook. Click [here](https://medibook-l7196oikd-renivens-projects.vercel.app/) to go the website or run the server on your own local device.
 
 ## Getting Started
 
@@ -15,5 +15,5 @@ bun dev
 ```
 
 ## Stack
-Frontend: Next.js, React, Tainwind CSS, ShadCN
+Frontend: Next.js, React, Tainwind CSS, ShadCN<br>
 Backend: Supbase, node.js
