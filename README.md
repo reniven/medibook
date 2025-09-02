@@ -29,5 +29,3 @@ Built with a **full-stack architecture** leveraging Next.js, React, Tailwind CSS
 - [Supabase](https://supabase.com/) (Database, Authentication, API)  
 - [Node.js](https://nodejs.org/)  
 
-## Project Structure
-
